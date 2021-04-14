@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux'; //Для подключение  глобального store  к Redux. Достаем  Provider  (пакет из react-redux) - компонент, который оборачивает все наше приложение, он ставится поверх App, и он через контекст (контекст - это глобальная переменная) может прокидывать в глубину и на любую вложенность дополнительный функционал.
 
-import { BrowserRouter } from 'react-router-dom';
-
 // import { PersistGate } from 'redux-persist/integration/react'; // используется для реализации redux-persist
+
+import { BrowserRouter } from 'react-router-dom';
 
 // Data
 //  Для передачи Provider в props store, с ссылкой на наше хранилище  сначала импортируем этот файл

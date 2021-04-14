@@ -2,8 +2,11 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'; //// co
 
 import logger from 'redux-logger'; // прослойка (middleware) при console.log() отображает action (до и после)
 
+// import storage from 'redux-persist/lib/storage'; //для local storage
+
 import {
   // persistStore,
+  // persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -14,6 +17,8 @@ import {
 
 // Reducers
 import phonebookReducer from './phonebook/phonebook-reducer';
+
+import { authReducers } from './authorization';
 
 // создаем новый стек прослоек, который вернет список default Middlewares (прослоек), к которому добавляем еще logger =  прослойка (middleware) при console.log() отображает action (до и после) и добавляем его в reducer
 
@@ -39,6 +44,7 @@ const store = configureStore({
   reducer: {
     // тот reducer, который нужен для persist сперва оборачиваем в persistReducer.
     contacts: phonebookReducer,
+    auth: authReducers,
   },
   middleware, //возвращает список default Middlewares (прослоек), к которому добавляем еще logger =  прослойка (middleware) при console.log() отображает action (до и после)
 

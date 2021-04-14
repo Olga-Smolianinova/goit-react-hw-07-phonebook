@@ -1,52 +1,61 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
+
+import { Route, Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
 // Data
-import { contactsOperations, contactsSelectors } from './redux/phonebook';
 
 // Components
-import ContactsForm from './components/ContactsForm';
+import Container from './components/Container';
 
-import Filter from './components/Filter';
+import AppBar from './components/AppBar';
 
-import ContactList from './components/ContactList';
+// Pages. Lazy. Chunk
+const HomePage = lazy(() =>
+  import('./pages/HomePage' /* webpackChunkName: "home-page" */),
+);
+
+const ContactsPage = lazy(() =>
+  import('./pages/ContactsPage' /* webpackChunkName: "contacts-page" */),
+);
+
+const RegisterPage = lazy(() =>
+  import('./pages/RegisterPage' /* webpackChunkName: "register-page" */),
+);
+
+const LoginPage = lazy(() =>
+  import('./pages/LoginPage' /* webpackChunkName: "login-page" */),
+);
 
 class App extends Component {
   //  ЖИЗНЕННЫЕ ЦИКЛЫ
-  componentDidMount() {
-    // // при Mount страницы, чтобы из локального бекенда db.json - отрисовывались данные (contacts)
-    this.props.fetchContacts();
-  }
 
   render() {
     return (
-      <div className="App">
-        <h1>Phonebook</h1>
+      <Container>
+        <AppBar />
 
-        <ContactsForm />
+        <Suspense fallback={<p>Loading in progress...</p>}>
+          <Switch>
+            <Route exact path="/" component={HomePage}></Route>
 
-        <h2>Contacts</h2>
+            <Route path="/contacts" component={ContactsPage}></Route>
 
-        <Filter />
+            <Route path="/register" component={RegisterPage}></Route>
 
-        {/* добавляем отображение Loading при открытии страницы при загрузке данных*/}
-        {this.props.isLoadingContacts && <h2>Loading...</h2>}
-
-        <ContactList />
-      </div>
+            <Route path="/login" component={LoginPage}></Route>
+          </Switch>
+        </Suspense>
+      </Container>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  // isLoadingContacts: state.contacts.loading, //без использования selectors
+// const mapStateToProps = state => ({});
 
-  isLoadingContacts: contactsSelectors.getLoading(state), //с использованием selectors
-});
+// const mapDispatchToProps = dispatch => ({
 
-const mapDispatchToProps = dispatch => ({
-  fetchContacts: () => dispatch(contactsOperations.fetchContacts()),
-});
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect()(App);
