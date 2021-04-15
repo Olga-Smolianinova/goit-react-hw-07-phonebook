@@ -21,11 +21,28 @@ const register = credentials => async dispatch => {
   try {
     const response = await axios.post('/users/signup', credentials);
 
-    dispatch(authActions.registerSuccess(response));
+    dispatch(authActions.registerSuccess(response.data));
   } catch (error) {
-    dispatch(authActions.registerError(error));
+    dispatch(authActions.registerError(error.message));
+  }
+};
+
+/*
+ * POST @ /users/login
+ * body: { email, password } - credentials
+ * После успешного логина добавляем токен в HTTP-заголовок
+ */
+const logIn = credentials => async dispatch => {
+  dispatch(authActions.loginRequest());
+
+  try {
+    const response = await axios.post('/users/login', credentials);
+
+    dispatch(authActions.loginSuccess(response.data));
+  } catch (error) {
+    dispatch(authActions.loginError(error.message));
   }
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { register };
+export default { register, logIn };

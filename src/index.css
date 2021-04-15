@@ -31,9 +31,15 @@ p {
   margin: 0;
 }
 
-.App{
+.App {
   text-align: center;
-      width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* header */
+.header-title {
+  margin: 20px 0;
+  text-align: center;
 }

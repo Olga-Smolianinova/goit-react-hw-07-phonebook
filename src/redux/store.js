@@ -2,11 +2,11 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'; //// co
 
 import logger from 'redux-logger'; // прослойка (middleware) при console.log() отображает action (до и после)
 
-// import storage from 'redux-persist/lib/storage'; //для local storage
+import storage from 'redux-persist/lib/storage'; //для local storage
 
 import {
-  // persistStore,
-  // persistReducer,
+  persistStore,
+  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -34,6 +34,15 @@ const middleware = [
   logger, //прослойка (middleware) при console.log() отображает action (до и после) и добавляем его в reducer
 ];
 
+// настройки для сохранения данных в local storage
+const authPersistConfig = {
+  key: 'authorization', //название ключа, который будет отображаться в local storage
+
+  storage,
+
+  whitelist: ['token'], //что отображать в local storage
+};
+
 // Для каждого объекта в глобальном state свой отдельный Reducer. И внизу этого файла есть корневой редьюсер (rootReducer), где ключ - это название компонента со state для него, а значение - редьюсер, который отвечает за него.
 
 //createStore для toolkit -configureStore. DevTools у него уже под капотом. npm redux-devtools-extension можно удалять
@@ -44,7 +53,7 @@ const store = configureStore({
   reducer: {
     // тот reducer, который нужен для persist сперва оборачиваем в persistReducer.
     contacts: phonebookReducer,
-    auth: authReducers,
+    auth: persistReducer(authPersistConfig, authReducers), //для обработки authorization. Оборачиваем в persistReducer (1 аргумент - config; 2 - reducer, который обрабатывает)
   },
   middleware, //возвращает список default Middlewares (прослоек), к которому добавляем еще logger =  прослойка (middleware) при console.log() отображает action (до и после)
 
@@ -52,11 +61,11 @@ const store = configureStore({
 });
 
 //Создаем  persistor - обертка над store, которая при изменении store будет записывать в local storage и обновлять его.
-// const persistor = persistStore(store);
+const persistor = persistStore(store);
 
 // И export persistor  и store
 // eslint-disable-next-line import/no-anonymous-default-export
-// export default { persistor, store };
+export default { persistor, store };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default store;
+// export default store;

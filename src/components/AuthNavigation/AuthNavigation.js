@@ -10,7 +10,7 @@ const AuthNavigation = () => {
         className="nav-link"
         activeClassName="active-nav-link"
       >
-        Registration
+        Sign up
       </NavLink>
 
       <NavLink
