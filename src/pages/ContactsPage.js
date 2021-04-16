@@ -12,6 +12,11 @@ import Filter from '../components/Filter';
 import ContactList from '../components/ContactList';
 
 class ContactsPage extends Component {
+  // ЖИЗНЕННЫЕ ЦИКЛЫ
+  componentDidMount() {
+    this.props.fetchContacts();
+  }
+
   render() {
     return (
       <div className="App">
@@ -31,8 +36,6 @@ class ContactsPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  // isLoadingContacts: state.contacts.loading, //без использования selectors
-
   isLoadingContacts: contactsSelectors.getLoading(state), //с использованием selectors
 });
 

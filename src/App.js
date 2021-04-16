@@ -1,14 +1,18 @@
 import React, { Component, Suspense, lazy } from 'react';
 
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
 // Data
+import { authOperations } from './redux/authorization';
+
+// Route
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 
 // Components
 import Container from './components/Container';
-
 import AppBar from './components/AppBar';
 
 // Pages. Lazy. Chunk
@@ -30,6 +34,10 @@ const LoginPage = lazy(() =>
 
 class App extends Component {
   //  ЖИЗНЕННЫЕ ЦИКЛЫ
+  componentDidMount() {
+    //вызов onGetCurrentUser, в operations прописана логика  для того, чтобы сохранить текущего пользователя, а не выполнять логизацию каждый раз после обновления страницы; 1) сохраняем token в local storage и получаем к нему доступ через getState
+    this.props.onGetCurrentUser();
+  }
 
   render() {
     return (
@@ -38,13 +46,29 @@ class App extends Component {
 
         <Suspense fallback={<p>Loading in progress...</p>}>
           <Switch>
-            <Route exact path="/" component={HomePage}></Route>
+            <PublicRoute exact path="/" component={HomePage}></PublicRoute>
 
-            <Route path="/contacts" component={ContactsPage}></Route>
+            {/* чтобы не отображать содержимое Contacts страницы незалогиненному пользователю */}
+            <PrivateRoute
+              path="/contacts"
+              redirectTo="/login"
+              component={ContactsPage}
+            ></PrivateRoute>
 
-            <Route path="/register" component={RegisterPage}></Route>
+            {/* когда пользователь залогинен, ему не должны отображаться на определенные страницы, например регистрации и логинизации;  restricted - ограниченый маршрут */}
+            <PublicRoute
+              path="/register"
+              restricted
+              redirectTo="/contacts"
+              component={RegisterPage}
+            ></PublicRoute>
 
-            <Route path="/login" component={LoginPage}></Route>
+            <PublicRoute
+              path="/login"
+              restricted
+              redirectTo="/contacts"
+              component={LoginPage}
+            ></PublicRoute>
           </Switch>
         </Suspense>
       </Container>
@@ -52,10 +76,8 @@ class App extends Component {
   }
 }
 
-// const mapStateToProps = state => ({});
+const mapDispatchToProps = {
+  onGetCurrentUser: authOperations.getCurrentUser,
+};
 
-// const mapDispatchToProps = dispatch => ({
-
-// });
-
-export default connect()(App);
+export default connect(null, mapDispatchToProps)(App);

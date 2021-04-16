@@ -2,11 +2,8 @@ import axios from 'axios'; //для fetch запросов
 
 import actions from './phonebook-actions'; //синхронные actions
 
-axios.defaults.baseURL = `http://localhost:4141`; // baseURL
-
-// перезаписываем addContact и  так deleteContact, чтобы отправить  http-запрос на локальный бекенд - db.json (http://localhost:4141/сontacts). Передаем параметры, которые возвращают dispatch (dispatch вызовет thunk под капотом)
-
-//1- FETCH запрос. Для отрисовки contacts  из локального бекенда db.json при загрузке приложения
+// Get @/contacts
+//1- FETCH запрос. Для отрисовки contacts  из  бекенда  при загрузке приложения
 const fetchContacts = () => dispatch => {
   // для обработки request при старте. Просто отправляем  type (без payload), который затягиваем из phonebook-actions.js, для того, чтобы можно было поставить флажок загрузки
   dispatch(actions.fetchContactsRequest());
