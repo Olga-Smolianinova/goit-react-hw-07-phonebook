@@ -17,6 +17,7 @@ const ContactList = ({ contacts, onDeleteContact }) => {
           {name}: {number}
           <button
             type="button"
+            className={s.ContactsBtn}
             onClick={() => {
               onDeleteContact(id);
             }}

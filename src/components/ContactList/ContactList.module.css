@@ -1,8 +1,13 @@
-.ContactsList{
-   margin-right: auto;
-   margin-left: auto;
+.ContactsList {
+  margin-right: auto;
+  margin-left: auto;
 }
-.ContactsItem{
-    display: flex;
-    justify-content: space-between;
+.ContactsItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.ContactsBtn {
+  color: red;
+  background-color: aliceblue;
 }

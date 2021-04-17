@@ -43,3 +43,15 @@ p {
   margin: 20px 0;
   text-align: center;
 }
+
+/* HomePage */
+.homepage-container {
+  min-height: calc(100vh - 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.homepage-title {
+  font-weight: 700;
+  font-size: 48px;
+}
