@@ -51,6 +51,8 @@ const isAuthenticated = createReducer(false, {
 
   [authActions.getCurrentUserSuccess]: () => true, //успешная авторизация
 
+  [authActions.getCurrentUserRequest]: () => true, //костыль, чтобы при перезагрузке страницы пока идет авторизация пользователя, чтобы не перекидывало на несколько секунд на страницу логинизации
+
   // при ошибках isAuthenticated=false
   [authActions.registerError]: () => false,
   [authActions.loginError]: () => false,
