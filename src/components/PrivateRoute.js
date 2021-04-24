@@ -1,5 +1,8 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import {
+  Route,
+  // Redirect
+} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 // Data
@@ -21,9 +24,14 @@ const PrivateRoute = ({
 }) => (
   <Route
     {...routeProps}
-    render={props =>
-      // рендер по условию. Если пользователь авторизирован, то отрендери Component (страница Contacts), если нет - переведи на страницу Login
-      isAuthenticated ? <Component {...props} /> : <Redirect to={redirectTo} />
+    render={
+      props => (
+        // рендер по условию. Если пользователь авторизирован, то отрендери Component (страница Contacts), если нет - переведи на страницу Login
+        // isAuthenticated ?
+        <Component {...props} />
+      )
+      // :
+      // <Redirect to={redirectTo} />
     }
   />
 );

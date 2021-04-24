@@ -46,14 +46,14 @@ class App extends Component {
 
         <Suspense fallback={<p>Loading in progress...</p>}>
           <Switch>
-            <PublicRoute exact path="/" component={HomePage}></PublicRoute>
+            <PublicRoute exact path="/" component={HomePage} />
 
             {/* чтобы не отображать содержимое Contacts страницы незалогиненному пользователю */}
             <PrivateRoute
               path="/contacts"
               redirectTo="/login"
               component={ContactsPage}
-            ></PrivateRoute>
+            />
 
             {/* когда пользователь залогинен, ему не должны отображаться на определенные страницы, например регистрации и логинизации;  restricted - ограниченый маршрут */}
             <PublicRoute
@@ -61,14 +61,14 @@ class App extends Component {
               restricted
               redirectTo="/contacts"
               component={RegisterPage}
-            ></PublicRoute>
+            />
 
             <PublicRoute
               path="/login"
               restricted
               redirectTo="/contacts"
               component={LoginPage}
-            ></PublicRoute>
+            />
           </Switch>
         </Suspense>
       </Container>

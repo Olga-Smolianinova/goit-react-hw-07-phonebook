@@ -33,9 +33,9 @@ p {
 
 .App {
   text-align: center;
-  width: 600px;
+  /* width: 600px;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; */
 }
 
 /* header */
