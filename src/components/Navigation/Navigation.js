@@ -20,16 +20,16 @@ const Navigation = ({ isAuthenticated }) => {
         Home
       </NavLink>
       {/* рендер по условию, чтобы страница Заметки не отображалась вообще, если пользователь незалогинен */}
-      {/* {isAuthenticated && ( */}
-      <NavLink
-        exact
-        to="/contacts"
-        className="nav-link"
-        activeClassName="active-nav-link"
-      >
-        Contacts
-      </NavLink>
-      {/* )} */}
+      {isAuthenticated && (
+        <NavLink
+          exact
+          to="/contacts"
+          className="nav-link"
+          activeClassName="active-nav-link"
+        >
+          Contacts
+        </NavLink>
+      )}
     </nav>
   );
 };
