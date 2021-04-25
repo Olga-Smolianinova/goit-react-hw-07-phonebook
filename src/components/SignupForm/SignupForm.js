@@ -33,7 +33,7 @@ class SignupForm extends Component {
     const { name, email, password } = this.state;
 
     return (
-      <>
+      <div className="UserMenu">
         <h2 className="header-title">Registration Page</h2>
 
         {/* форма из bootstrap. Подключенo в index.html */}
@@ -95,7 +95,7 @@ class SignupForm extends Component {
             Submit
           </button>
         </form>
-      </>
+      </div>
     );
   }
 }

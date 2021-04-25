@@ -32,7 +32,7 @@ class LoginPage extends Component {
     const { email, password } = this.state;
 
     return (
-      <>
+      <div className="UserMenu">
         <h2 className="header-title">Login Page</h2>
 
         {/* форма из bootstrap. Подключение в index.html */}
@@ -79,7 +79,7 @@ class LoginPage extends Component {
             Submit
           </button>
         </form>
-      </>
+      </div>
     );
   }
 }

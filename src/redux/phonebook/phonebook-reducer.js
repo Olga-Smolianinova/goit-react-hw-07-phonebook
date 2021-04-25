@@ -43,8 +43,16 @@ const loading = createReducer(false, {
   [actions.deleteContactError]: () => false,
 });
 
+// 3 - редьюсер для error
+const error = createReducer(null, {
+  [actions.fetchContactsError]: (_, { payload }) => payload,
+  [actions.addContactError]: (_, { payload }) => payload,
+  [actions.deleteContactError]: (_, { payload }) => payload,
+});
+
 export default combineReducers({
   items,
   filter,
   loading, //для отображения состояния загрузки во время http-запроса
+  error,
 });
