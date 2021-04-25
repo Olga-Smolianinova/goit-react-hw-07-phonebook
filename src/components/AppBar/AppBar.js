@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Data
 import { authSelectors } from '../../redux/authorization';
@@ -21,6 +22,10 @@ const AppBar = ({ isAuthenticated }) => {
       {isAuthenticated ? <UserMenu /> : <AuthNavigation />}
     </header>
   );
+};
+
+AppBar.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({

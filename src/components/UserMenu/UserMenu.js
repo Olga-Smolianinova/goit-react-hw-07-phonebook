@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Data
 import { authSelectors, authOperations } from '../../redux/authorization';
@@ -21,6 +22,12 @@ const UserMenu = ({ name, avatar, onLogout }) => {
       </button>
     </div>
   );
+};
+
+UserMenu.propTypes = {
+  name: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  onLogout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

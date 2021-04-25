@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Container.scss';
 
@@ -18,6 +19,11 @@ const Container = ({ children, title, icon }) => {
       </div>
     </div>
   );
+};
+
+Container.propTypes = {
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
 };
 
 export default Container;

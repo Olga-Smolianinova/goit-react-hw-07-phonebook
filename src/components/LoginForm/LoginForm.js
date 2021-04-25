@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Data
 import { authOperations } from '../../redux/authorization';
@@ -83,6 +84,10 @@ class LoginPage extends Component {
     );
   }
 }
+
+LoginPage.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = {
   //для dispatch нужны authOperations для регистрации
