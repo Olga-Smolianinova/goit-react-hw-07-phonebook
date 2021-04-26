@@ -22,8 +22,9 @@ const Container = ({ children, title, icon }) => {
 };
 
 Container.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  children: PropTypes.node,
+  title: PropTypes.string,
+  icon: PropTypes.string,
 };
 
 export default Container;

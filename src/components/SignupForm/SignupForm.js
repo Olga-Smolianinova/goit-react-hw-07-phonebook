@@ -23,6 +23,12 @@ class SignupForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    // если отсутствуют данные
+    if (!this.state.name || !this.state.email || !this.state.password) {
+      alert('Fill the Registration form');
+      return;
+    }
+
     // вызов dispatch onRegister
     this.props.onRegister(this.state);
 
@@ -85,6 +91,7 @@ class SignupForm extends Component {
             <input
               type="password"
               className="form-control"
+              placeholder={'More than 7 symbols'}
               name="password"
               value={password}
               onChange={this.handleChange}

@@ -22,9 +22,17 @@ class LoginPage extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    // // если отсутствуют данные
+    // console.log(this.state.email);
+    // console.log(this.state.password);
+    if (!this.state.email || !this.state.password) {
+      alert('Fill the Login form');
+      return;
+    }
+
     // вызов dispatch onLogin
     this.props.onLogin(this.state);
-
+    console.log(this.props);
     // очистка данных в форме
     this.setState({ email: '', password: '' });
   };

@@ -3,7 +3,9 @@ import axios from 'axios';
 // Data
 import authActions from './authorization-actions';
 
-axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
+// axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
+
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 const token = {
   // у axios  на определенный defaults можно на определенный header привязать какое-либо свойство для всех будущих http-запросов. Указываем этот заголовок Authorization, когда пользователь или зарегистрировался или залогинился, т.е. когда получаю token, который, чтобы каждый раз его не прописывать записываем сразу глобально
@@ -32,6 +34,7 @@ const register = credentials => async dispatch => {
 
     dispatch(authActions.registerSuccess(response.data));
   } catch (error) {
+    alert('You entered incorrect data. Check your name, login and password');
     dispatch(authActions.registerError(error.message));
   }
 };
@@ -52,6 +55,7 @@ const logIn = credentials => async dispatch => {
 
     dispatch(authActions.loginSuccess(response.data));
   } catch (error) {
+    alert('You entered incorrect data, check your login and password');
     dispatch(authActions.loginError(error.message));
   }
 };
